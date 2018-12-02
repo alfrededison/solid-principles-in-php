@@ -1,10 +1,12 @@
 <?php
 
+require_once('../1.single-responsibility/shared.php');
+
 class AreaCalculator {
     
     protected $shapes;
 
-    public function __construct($shapes = array()) {
+    function __construct($shapes = array()) {
         $this->shapes = $shapes;
     }
 
@@ -27,3 +29,13 @@ class AreaCalculator {
         return array_sum($area);
     }
 }
+
+$shapes = array(
+    new Circle(2),
+    new Square(5),
+    new Square(6)
+);
+
+$areas = new AreaCalculator($shapes);
+
+echo $areas->sum() . "\n";

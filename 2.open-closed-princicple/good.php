@@ -16,7 +16,7 @@ interface ShapeInterface {
 class Circle implements ShapeInterface {
     public $radius;
 
-    public function __construct($radius) {
+    function __construct($radius) {
         $this->radius = $radius;
     }
 
@@ -28,7 +28,7 @@ class Circle implements ShapeInterface {
 class Square implements ShapeInterface {
     public $length;
 
-    public function __construct($length) {
+    function __construct($length) {
         $this->length = $length;
     }
 
@@ -41,7 +41,7 @@ class AreaCalculator {
     
     protected $shapes;
 
-    public function __construct($shapes = array()) {
+    function __construct($shapes = array()) {
         $this->shapes = $shapes;
     }
 
@@ -63,3 +63,13 @@ class AreaCalculator {
         return array_sum($area);
     }
 }
+
+$shapes = array(
+    new Circle(2),
+    new Square(5),
+    new Square(6)
+);
+
+$areas = new AreaCalculator($shapes);
+
+echo $areas->sum() . "\n";
