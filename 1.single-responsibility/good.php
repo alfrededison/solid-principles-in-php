@@ -17,6 +17,9 @@ class AreaCalculator {
 
     public function sum() {
         // logic to sum the areas
+        // temporarily set a hard-coded number here
+        // will improve in next principle
+        return 10;
     }
 }
 
@@ -28,12 +31,34 @@ class SumCalculatorOutputter {
     
     protected $area;
 
-    public function __construct($area) {
+    function __construct($area) {
         $this->area = $area;
     }
     
-    public function toHTML() {}
-    public function toJson() {}
-    public function toXml() {}
-    public function toCsv() {}
+    public function toHTML() {
+        return "<div>Sum of the areas of provided shapes: ". $this->area->sum() . "</div>";
+    }
+    public function toJson() {
+        $data = array(
+            'sum' => $this->area->sum()
+        );
+
+        return json_encode($data);
+    }
+    public function toXml() {
+        return "<data><sum>". $this->area->sum() . "</sum></data>";
+    }
 }
+
+$shapes = array(
+    new Circle(2),
+    new Square(5),
+    new Square(6)
+);
+
+$areas = new AreaCalculator($shapes);
+$output = new SumCalculatorOutputter($areas);
+
+echo $output->toHTML() . "\n";
+echo $output->toJson() . "\n";
+echo $output->toXml() . "\n";

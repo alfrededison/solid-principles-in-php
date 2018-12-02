@@ -3,7 +3,7 @@
 class Circle {
     public $radius;
 
-    public function construct($radius) {
+    function __construct($radius) {
         $this->radius = $radius;
     }
 }
@@ -11,8 +11,7 @@ class Circle {
 class Square {
     public $length;
 
-    public function construct($length) {
+    function __construct($length) {
         $this->length = $length;
     }
 }
-
