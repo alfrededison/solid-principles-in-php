@@ -9,8 +9,13 @@
 class PasswordReminder {
     private $dbConnection;
 
-    public function __construct(DBConnectionInterface $dbConnection) {
+    function __construct(DBConnectionInterface $dbConnection) {
         $this->dbConnection = $dbConnection;
+    }
+    
+    public function remind() {
+        $this->dbConnection->connect();
+        // do other stuff
     }
 }
 
@@ -23,6 +28,19 @@ interface DBConnectionInterface {
 *********************************/
 class MySQLConnection implements DBConnectionInterface {
     public function connect() {
-        return "Database connection";
+        echo "Mysql database connection\n";
     }
 }
+class MongoDbConnection implements DBConnectionInterface {
+    public function connect() {
+        echo "MongoDB database connection\n";
+    }
+}
+
+$mySqlConn = new MySQLConnection();
+$passwordReminder = new PasswordReminder($mySqlConn);
+$passwordReminder->remind();
+
+$mongoConn = new MongoDbConnection();
+$passwordReminder = new PasswordReminder($mongoConn);
+$passwordReminder->remind();

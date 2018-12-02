@@ -13,7 +13,22 @@ class PasswordReminder {
     * you would also have to edit the PasswordReminder class
     * and thus violates Open-closed principle.
     *********************************/
-    public function __construct(MySQLConnection $dbConnection) {
+    function __construct(MySQLConnection $dbConnection) {
         $this->dbConnection = $dbConnection;
     }
+    
+    public function remind() {
+        $this->dbConnection->connect();
+        // do other stuff
+    }
 }
+
+class MySQLConnection {
+    public function connect() {
+        echo "Database connection\n";
+    }
+}
+
+$conn = new MySQLConnection();
+$passwordReminder = new PasswordReminder($conn);
+$passwordReminder->remind();
